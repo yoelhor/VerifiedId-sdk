@@ -29,7 +29,7 @@ public class IssuanceRequest
     /// For example, the developer might want a call when the user has scanned the QR code or if the issuance request succeeds or fails.
     /// </summary>  
     [JsonPropertyName("callback")]
-    public Callback Callback { get; set; }
+    public CallbackDefinition Callback { get; set; }
 
     /// <summary>
     /// The Verified ID credential type. Should match the type as defined in the verifiable credential manifest. 
@@ -89,7 +89,7 @@ public class IssuanceRequest
     }
 
     /// <summary>
-    /// Deserialize a JSON string into CallbackEvent object
+    /// Deserialize a JSON string into IssuanceRequest object
     /// </summary>
     /// <param name="JsonString">The JSON string to be loaded</param>
     /// <returns></returns>
@@ -99,77 +99,6 @@ public class IssuanceRequest
     }
 }
 
-/// <summary>
-/// Registration - used in both issuance and presentation to give the app a display name
-/// </summary>
-public class RequestRegistration
-{
-    /// <summary>
-    /// A display name of the issuer of the verifiable credential.
-    /// </summary>  
-    [JsonPropertyName("clientName")]
-    public string ClientName { get; set; }
-
-    /// <summary>
-    /// Optional. The URL for the issuer logo.
-    /// </summary>  
-    [JsonPropertyName("logoUrl")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string LogoUrl { get; set; }
-
-    /// <summary>
-    /// Optional. The URL for the terms of use of the verifiable credential that you are issuing.
-    /// </summary>  
-    [JsonPropertyName("termsOfServiceUrl")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string TermsOfServiceUrl { get; set; }
-}
 
 
-/// <summary>
-/// Pin - if issuance involves the use of a pin code. The 'value' attribute is a string so you can have values like "0907"
-/// </summary>
-public class Pin
-{
 
-    /// <summary>
-    /// Contains the PIN value in plain text. When you're using a hashed PIN, the value property contains the salted hash, base64 encoded.
-    /// </summary>  
-    [JsonPropertyName("value")]
-    public string Value { get; set; }
-
-
-    /// <summary>
-    /// The length of the PIN code. The default length is 6, the minimum is 4, and the maximum is 16.
-    /// </summary>  
-    [JsonPropertyName("length")]
-    public int Length { get; set; } = 6;
-
-    /// <summary>
-    /// The type of the PIN code. Possible value: numeric (default).
-    /// </summary>  
-    [JsonPropertyName("type")]
-    public string Type { get; set; } = "numeric";
-
-    /// <summary>
-    /// The salt of the hashed PIN code. The salt is prepended during hash computation. Encoding: UTF-8.
-    /// </summary>  
-    [JsonPropertyName("salt")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string Salt { get; set; }
-
-    /// <summary>
-    /// The hashing algorithm for the hashed PIN. Supported algorithm: sha256
-    /// </summary>  
-    [JsonPropertyName("alg")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string Algorithm { get; set; }
-
-
-    /// <summary>
-    /// number of hashing iterations. Possible value: 1.
-    /// </summary>  
-    [JsonPropertyName("iterations")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public int? Iterations { get; set; }
-}

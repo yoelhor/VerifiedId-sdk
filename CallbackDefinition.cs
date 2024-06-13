@@ -8,7 +8,7 @@ namespace Microsoft.Identity.VerifiedID;
 /// state - something we pass that we get back in the callback event. We use it as a correlation id
 /// headers - any additional HTTP headers you want to pass to the VC Client API. 
 /// The values you pass will be returned, as HTTP Headers, in the callback
-public class Callback
+public class CallbackDefinition
 {
     /// <summary>
     /// URI to the callback endpoint of your application. The URI must point to a reachable endpoint on the internet otherwise the service will throw callback URL unreadable error. 
